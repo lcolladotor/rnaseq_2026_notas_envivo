@@ -63,12 +63,22 @@ rse[1:2, ]
 ## Comando 2
 rse[, c("A", "D", "F")]
 
+## Ejemplo de un boxplot
+x <- 1:100
+y <- rep(c("A", "B"), each = 50)
+boxplot(x ~ y)
+summary(lm(x ~ y)) ## Hay una diferencia significativa
+
+## Ejemplo de un boxplot para el gene_3 por Treatment
+x <- assay(rse)["gene_3", ]
+y <- rse$Treatment ## También funciona con colData(rse)$Treatment
+boxplot(x ~ y)
+summary(lm(x ~ y)) ## No hay diferencia significativa
 
 ## ----isee_basic, eval = FALSE---------------------------------------------------
 # ## Explora el objeto rse de forma interactiva
 # library("iSEE")
 # iSEE::iSEE(rse)
-
 
 ## ----download_sce_layer---------------------------------------------------------
 ## Descarguemos unos datos de spatialLIBD
@@ -78,7 +88,5 @@ sce_layer
 ## Revisemos el tamaño de este objeto
 lobstr::obj_size(sce_layer)
 
-
 ## ----explore_sce_layer, eval = FALSE--------------------------------------------
 # iSEE::iSEE(sce_layer)
-

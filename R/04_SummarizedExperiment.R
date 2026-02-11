@@ -90,3 +90,28 @@ lobstr::obj_size(sce_layer)
 
 ## ----explore_sce_layer, eval = FALSE--------------------------------------------
 # iSEE::iSEE(sce_layer)
+
+## ejemplo de gating
+## escrito por Charlotte Soneson en
+## https://github.com/iSEE/iSEE/issues/650#issuecomment-2061941784
+library("scRNAseq")
+library("scater")
+library("iSEE")
+sce <- ReprocessedAllenData(assays = "tophat_counts")
+sce <- logNormCounts(sce, exprs_values = "tophat_counts")
+sce <- runPCA(sce, ncomponents = 4)
+initial <- list(
+    FeatureAssayPlot(Assay = "logcounts", YAxisFeatureName = "Serpine2"),
+    FeatureAssayPlot(
+        Assay = "logcounts",
+        YAxisFeatureName = "Bcl6",
+        ColumnSelectionSource = "FeatureAssayPlot1",
+        ColumnSelectionRestrict = TRUE
+    ),
+    ReducedDimensionPlot(
+        Type = "PCA",
+        ColorBy = "Column selection",
+        ColumnSelectionSource = "FeatureAssayPlot2"
+    )
+)
+iSEE(sce, initial = initial)

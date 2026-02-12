@@ -44,3 +44,6 @@ rse_gene_SRP009615 <- expand_sra_attributes(rse_gene_SRP009615)
 colData(rse_gene_SRP009615)[,
     grepl("^sra_attribute", colnames(colData(rse_gene_SRP009615)))
 ]
+
+## Ejercicio con iSEE
+iSEE::iSEE(rse_gene_SRP009615)

@@ -8,6 +8,11 @@ colnames(mat)
 ## ----lm_example-----------------------------------------------
 summary(lm(log(Volume) ~ log(Height) + log(Girth), data = trees))
 
+with(trees, plot(log(Volume) ~ log(Height)))
+with(trees, plot(log(Volume) ~ log(Height), xlim = c(-2, 6)))
+with(trees, plot(log(Volume) ~ log(Girth)))
+
+1.98 / 0.07
 
 ## ----EMM_example1---------------------------------------------
 ## Datos de ejemplo
